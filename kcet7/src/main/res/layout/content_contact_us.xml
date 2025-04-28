@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/fab_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        app:cardBackgroundColor="@android:color/darker_gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tx_thanks"
+        android:text=" ~ Thank you for choosing the app as your Study mate. \n Thanking my nephew Suhag U for the Quality work in setting up the Backend database. \n ~ We're constantly trying to improvise the app in every manner possible \n ~  Suggestions and feedback is appreciated and always considered. \n Any corrections in any Question/Answer, please feel free to write us @ below mentioned mail / number."
+        android:textSize="@dimen/question_text_size"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tx_more_apps"
+        android:layout_below="@+id/card"
+        android:text="@string/messageWithLink"
+        android:textSize="@dimen/question_text_size"
+        android:textColor="@android:color/holo_green_light"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:theme="@style/ProgressBarStyle"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tx_more_apps"
+        android:indeterminate="false"
+        android:max="100"
+        android:minHeight="50dp"
+        android:progress="1" />
+
+    <TextView
+        android:id="@+id/tx_contact"
+        android:text="Naveen Prakash"
+        android:textSize="@dimen/question_text_size"
+        android:textStyle="italic"
+        android:gravity="end"
+        android:layout_above="@+id/tx_mailto"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tx_mailto"
+        android:layout_above="@+id/tx_phno"
+        android:textSize="@dimen/question_text_size"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="italic"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:text="karnataka.cet7@gmail.com"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tx_phno"
+        android:textSize="@dimen/question_text_size"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="italic"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="+918884846307"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+</RelativeLayout>
+

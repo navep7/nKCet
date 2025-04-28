@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "799716261640",
+    "firebase_url": "https://kcet-2df72-default-rtdb.firebaseio.com",
+    "project_id": "kcet-2df72",
+    "storage_bucket": "kcet-2df72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799716261640:android:f4404ac67b3d18ad54b6bd",
+        "android_client_info": {
+          "package_name": "com.belaku.kcet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799716261640-doamems476hfr28hdf3lrtafkrhdsj72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5pqyUEK1cnIvGrRaSi-El3aR4HgtYxqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799716261640-doamems476hfr28hdf3lrtafkrhdsj72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

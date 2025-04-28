@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tx_q"
+        android:text="Question"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/imgv_q"
+        android:src="@drawable/cet_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tx_q"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imgv_q"
+        android:layout_above="@id/imgv_o"
+        android:visibility="invisible" />
+
+
+    <ImageView
+        android:id="@+id/imgv_o"
+        android:src="@drawable/cet_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imgv_q"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tx_o"
+        android:layout_below="@+id/imgv_o"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tx_a"
+        android:layout_below="@+id/tx_o"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <View
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tx_a"
+        android:background="?attr/colorPrimary"/>
+
+</RelativeLayout>

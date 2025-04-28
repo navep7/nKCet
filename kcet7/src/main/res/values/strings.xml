@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">nKCet</string>
+
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="title_activity_subject">Subjects</string>
+    <string name="title_activity_year">Years</string>
+    <string name="title_activity_contact_us">Contact Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="darkmode">Dark Mode</string>
+    <string name="lightmode">Light Mode</string>
+    <string name="messageWithLink"><a href="https://play.google.com/store/apps/developer?id=Naveen+Prakash">Checkout more Android apps from Naveen Prakash in Google play store</a></string>
+
+
+
+    <string name="admob_app_id">ca-app-pub-6424332507659067~9805923973</string>
+
+    <!--nA : ca-app-pub-6424332507659067/9534477148
+        nT : ca-app-pub-3940256099942544/2247696110-->
+    <string name="actual_native_id1">ca-app-pub-3940256099942544/2247696110</string>
+
+    <!--nA : ca-app-pub-6424332507659067/1168660716
+        nT : ca-app-pub-3940256099942544/2247696110-->
+    <string name="actual_native_id2">ca-app-pub-3940256099942544/2247696110</string>
+
+    <!--nA : ca-app-pub-6424332507659067/1511682747
+        nT : ca-app-pub-3940256099942544/2247696110-->
+    <string name="actual_native_id3">ca-app-pub-3940256099942544/2247696110</string>
+
+
+
+    <!-- HIGH FLOOR
+        nA : ca-app-pub-6424332507659067/3175876952
+        nT : ca-app-pub-3940256099942544/2247696110-->
+    <string name="actual_native_id4">ca-app-pub-3940256099942544/2247696110</string>
+
+    <!-- MED FLOOR
+        bA : ca-app-pub-6424332507659067/7885519400
+        bT : ca-app-pub-3940256099942544/6300978111-->
+    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+
+
+    <!--iA : ca-app-pub-6424332507659067/7459797393
+        iT : ca-app-pub-3940256099942544/1033173712-->
+    <string name="admob_interst_id">ca-app-pub-3940256099942544/1033173712</string>
+
+
+
+    <string name="rate_app_message">If the App is educating you, requesting you to rate my app 5 stars with a meaningful comment in Play store, so that fellow students will also get the benefit of knowing about the CET app</string>
+    <string name="rate_btn_pos">Rate now</string>
+    <string name="rate_btn_neg">Not now</string>
+    <string name="rate_btn_nut">"Remind me"</string>
+
+</resources>
