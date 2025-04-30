@@ -1,5 +1,7 @@
 package com.belaku.kcet;
 
+import static com.belaku.kcet.SplashActivity.makeToast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,7 +25,7 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent != null) {
-            Toast.makeText(getApplicationContext(), intent.getExtras().get("score") + " Score", Toast.LENGTH_LONG).show();
+           makeToast(intent.getExtras().get("score") + " Score");
             editextScore.setText( intent.getExtras().get("score").toString());
         }
 

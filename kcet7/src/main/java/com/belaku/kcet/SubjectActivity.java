@@ -54,12 +54,15 @@ public class SubjectActivity extends AppCompatActivity {
     private TemplateView templateView;
     private boolean adLoaded = false;
     private AdLoader adLoader;
+    private TextView txUname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject);
 
+        txUname = findViewById(R.id.tx_uname);
+        txUname.setText(getIntent().getExtras().getString("accName"));
 
         templateView = findViewById(R.id.nativeTemplateView);
 
@@ -126,15 +129,37 @@ public class SubjectActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabMain = findViewById(R.id.fab);
+        FloatingActionButton fabLogOut = findViewById(R.id.fab_logout);
+        FloatingActionButton fabContactUs = findViewById(R.id.fab_contactus);
+
+        fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Reach us @ ~ Naveen Prakash \n karnataka.cet7@gmail.com / +918884846307", Snackbar.LENGTH_INDEFINITE)
+                fabMain.setVisibility(View.INVISIBLE);
+                fabLogOut.setVisibility(View.VISIBLE);
+                fabContactUs.setVisibility(View.VISIBLE);
+            }
+        });
+
+        fabContactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Reach us @ ~ Naveen Prakash \n karnataka.cet7@gmail.com / +918884846307", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Action", null).show();
                 startActivity(new Intent(SubjectActivity.this, ContactUsActivity.class));
             }
         });
+
+        fabLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Yet2Impl", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
     }
 
 
@@ -201,8 +226,7 @@ public class SubjectActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Log.d("ReviewDone", "Successful");
-                        Toast.makeText(getApplicationContext(), "ReviewDone - Successful", Toast.LENGTH_SHORT).show();
+                       makeToast("ReviewDone - Successful");
                     }
 
                 }

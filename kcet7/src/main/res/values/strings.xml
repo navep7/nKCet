@@ -19,32 +19,32 @@
 
     <!--nA : ca-app-pub-6424332507659067/9534477148
         nT : ca-app-pub-3940256099942544/2247696110-->
-    <string name="actual_native_id1">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="actual_native_id1">ca-app-pub-6424332507659067/9534477148</string>
 
     <!--nA : ca-app-pub-6424332507659067/1168660716
         nT : ca-app-pub-3940256099942544/2247696110-->
-    <string name="actual_native_id2">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="actual_native_id2">ca-app-pub-6424332507659067/1168660716</string>
 
     <!--nA : ca-app-pub-6424332507659067/1511682747
         nT : ca-app-pub-3940256099942544/2247696110-->
-    <string name="actual_native_id3">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="actual_native_id3">ca-app-pub-6424332507659067/1511682747</string>
 
 
 
     <!-- HIGH FLOOR
         nA : ca-app-pub-6424332507659067/3175876952
         nT : ca-app-pub-3940256099942544/2247696110-->
-    <string name="actual_native_id4">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="actual_native_id4">ca-app-pub-6424332507659067/3175876952</string>
 
     <!-- MED FLOOR
         bA : ca-app-pub-6424332507659067/7885519400
         bT : ca-app-pub-3940256099942544/6300978111-->
-    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id">ca-app-pub-6424332507659067/7885519400</string>
 
 
     <!--iA : ca-app-pub-6424332507659067/7459797393
         iT : ca-app-pub-3940256099942544/1033173712-->
-    <string name="admob_interst_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_interst_id">ca-app-pub-6424332507659067/7459797393</string>
 
 
 

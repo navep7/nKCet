@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/tx_thanks"
-        android:text=" ~ Thank you for choosing the app as your Study mate. \n Thanking my nephew Suhag U for the Quality work in setting up the Backend database. \n ~ We're constantly trying to improvise the app in every manner possible \n ~  Suggestions and feedback is appreciated and always considered. \n Any corrections in any Question/Answer, please feel free to write us @ below mentioned mail / number."
+        android:text=" ~ Thank you for choosing the app as your Study mate. \n  ~ We're constantly trying to improvise the app in every manner possible \n ~  Suggestions and feedback is appreciated and always considered. \n Any corrections in any Question/Answer, please feel free to write us @ below mentioned mail / number."
         android:textSize="@dimen/question_text_size"
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginLeft="@dimen/fab_margin"

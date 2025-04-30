@@ -116,14 +116,6 @@
 
             </RadioGroup>
 
-            <Button
-                android:id="@+id/btn_answer"
-                android:text="Answer"
-                android:layout_below="@+id/radio_group_options"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/fab_margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
@@ -136,12 +128,39 @@
                 ads:adUnitId="@string/admob_banner_id"/>
 
 
+            <FrameLayout
+                android:id="@+id/framelayout_answer"
+                android:visibility="invisible"
+                android:layout_below="@+id/radio_group_options"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <EditText
+                    android:id="@+id/edtx_answer_explained"
+                    android:hint="Explain Briefly... \n\n\n\n\n"
+                    android:textColorHint="?attr/colorPrimary"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_edtxanswer_submit"
+                    android:text="Submit"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom" />
+
+            </FrameLayout>
+
+
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/nativeTemplateView"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_answer"
+                android:layout_below="@+id/framelayout_answer"
                 android:layout_margin="@dimen/fab_margin"
                 app:gnt_template_type="@layout/gnt_medium_template_view" />
 

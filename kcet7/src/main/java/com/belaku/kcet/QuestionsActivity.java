@@ -32,6 +32,7 @@ import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -100,7 +101,10 @@ public class QuestionsActivity extends AppCompatActivity {
     private LinearLayoutManager llm;
     private boolean adLoaded = false;
     private AdLoader adLoader;
-    private Button buttonAnswer;
+    private FrameLayout frameLayoutAnswer;
+    private Button buttonSubmitAnswer;
+    private EditText edtxAnswer;
+    private static String strAE;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -113,26 +117,24 @@ public class QuestionsActivity extends AppCompatActivity {
         findViewByIds();
         listeners();
 
-        adLoader = new AdLoader.Builder(getApplicationContext(), getResources().getString(R.string.actual_native_id2))
-                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                    @Override
-                    public void onNativeAdLoaded(NativeAd nativeAd) {
-                        ColorDrawable background = new ColorDrawable();
-                        NativeTemplateStyle styles = new NativeTemplateStyle.Builder().withMainBackgroundColor(background).build();
+        adLoader = new AdLoader.Builder(getApplicationContext(), getResources().getString(R.string.actual_native_id2)).forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+            @Override
+            public void onNativeAdLoaded(NativeAd nativeAd) {
+                ColorDrawable background = new ColorDrawable();
+                NativeTemplateStyle styles = new NativeTemplateStyle.Builder().withMainBackgroundColor(background).build();
 
-                        templateView.setVisibility(View.VISIBLE);
-                        templateView.setStyles(styles);
-                        templateView.setNativeAd(nativeAd);
-                        adLoaded = true;
-                    }
-                })
-                .withAdListener(new AdListener() {
-                    @Override
-                    public void onAdFailedToLoad(LoadAdError adError) {
-                        makeToast("" + adError.getCode());
-                        // Handle the failure by logging, altering the UI, and so on.
-                    }
-                }).build();
+                templateView.setVisibility(View.VISIBLE);
+                templateView.setStyles(styles);
+                templateView.setNativeAd(nativeAd);
+                adLoaded = true;
+            }
+        }).withAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                makeToast("" + adError.getCode());
+                // Handle the failure by logging, altering the UI, and so on.
+            }
+        }).build();
 
 
         Handler handler1 = new Handler();
@@ -298,118 +300,19 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void listeners() {
-        buttonAnswer.setOnClickListener(new View.OnClickListener() {
+
+
+        edtxAnswer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                AnswerDialog();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (edtxAnswer.getText().toString().equals("Explain Briefly...!")) {
+                        edtxAnswer.setText("");
+                    }
+                }
             }
         });
 
-    }
-
-    private void AnswerDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(QuestionsActivity.this);
-        alertDialog.setTitle("Answer");
-        alertDialog.setMessage("Explain...");
-
-        final EditText input = new EditText(QuestionsActivity.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        alertDialog.setView(input);
-        alertDialog.setIcon(R.drawable.cet_icon);
-
-        alertDialog.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        SubmitAnswer(input.getText().toString());
-                    }
-                });
-
-        alertDialog.setNegativeButton("NO",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-        alertDialog.show();
-    }
-
-    private void SubmitAnswer(String string) {
-        makeToast("Ref - " + QsRef.child("1").child("BriefAnswer").setValue(string));
-    }
-
-
-    private void showBannerAd() {
-        if (SplashActivity.prodFlag) {
-            adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-    }
-
-
-    private void showNativeAd() {
-        if (SplashActivity.prodFlag)
-            if (adLoaded) {
-                templateView.invalidate();
-                templateView.setVisibility(View.VISIBLE);
-            } else {
-                // Load the Native ad if it is not loaded
-                loadNativeAd();
-            }
-    }
-
-    private void loadNativeAd() {
-        // Creating an Ad Request
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        // load Native Ad with the Request
-        adLoader.loadAd(adRequest);
-    }
-
-    private void loadIAd() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(this, getResources().getString(R.string.admob_interst_id), adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        mInterstitialAd = interstitialAd;
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        mInterstitialAd = null;
-                    }
-                });
-
-    }
-
-    private void highlightCorrectAns() {
-        switch (Integer.parseInt(listQnAs.get(count).getStringA())) {
-            case 0:
-                radioButton1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
-                break;
-            case 1:
-                radioButton2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
-                break;
-            case 2:
-                radioButton3.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
-                break;
-            case 3:
-                radioButton4.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
-                break;
-        }
-    }
-
-    private void findViewByIds() {
-
-        mAdView = findViewById(R.id.adView);
-        templateView = findViewById(R.id.nativeTemplateView);
-        buttonAnswer = findViewById(R.id.btn_answer);
-        buttonShowCorrectAnswer = findViewById(R.id.btn_show_the_correct_answer);
 
         buttonShowCorrectAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -418,27 +321,23 @@ public class QuestionsActivity extends AppCompatActivity {
                 buttonShowCorrectAnswer.setVisibility(View.INVISIBLE);
                 showFSAd();
                 highlightCorrectAns();
+                frameLayoutAnswer.setVisibility(View.VISIBLE);
+                edtxAnswer.setText(listQnAs.get(count).stringAnsExplained);
             }
         });
 
-        textViewMain = findViewById(R.id.tx_main);
+        buttonSubmitAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SubmitAnswer(edtxAnswer.getText().toString());
+            }
+        });
 
-
-        wbv = findViewById(R.id.webv);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        llm = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(llm);
-
-        imageViewQuestion = findViewById(R.id.imgv_q);
-        imageViewAnswer = findViewById(R.id.imgv_a);
-
-
-        floatingActionButtonNext = findViewById(R.id.fab_next);
         floatingActionButtonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                frameLayoutAnswer.setVisibility(View.INVISIBLE);
                 radioGroupOptions.setActivated(true);
                 radioGroupOptions.clearCheck();
                 radioButton1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -461,11 +360,12 @@ public class QuestionsActivity extends AppCompatActivity {
 
             }
         });
-        floatingActionButtonPrev = findViewById(R.id.fab_prev);
+
         floatingActionButtonPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                frameLayoutAnswer.setVisibility(View.INVISIBLE);
                 radioGroupOptions.setActivated(true);
                 radioGroupOptions.clearCheck();
                 radioButton1.setTextColor(getResources().getColor(R.color.black));
@@ -488,6 +388,102 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    private void SubmitAnswer(String string) {
+        makeToast("Ref - " + QsRef.child(String.valueOf(count + 1)).child("AE").setValue(string));
+    }
+
+
+    private void showBannerAd() {
+        if (SplashActivity.prodFlag) {
+            adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
+    }
+
+
+    private void showNativeAd() {
+        if (SplashActivity.prodFlag) if (adLoaded) {
+            templateView.invalidate();
+            templateView.setVisibility(View.VISIBLE);
+        } else {
+            // Load the Native ad if it is not loaded
+            loadNativeAd();
+        }
+    }
+
+    private void loadNativeAd() {
+        // Creating an Ad Request
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        // load Native Ad with the Request
+        adLoader.loadAd(adRequest);
+    }
+
+    private void loadIAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(this, getResources().getString(R.string.admob_interst_id), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                mInterstitialAd = interstitialAd;
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                mInterstitialAd = null;
+            }
+        });
+
+    }
+
+    private void highlightCorrectAns() {
+        switch (Integer.parseInt(listQnAs.get(count).getStringA())) {
+            case 0:
+                radioButton1.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+                break;
+            case 1:
+                radioButton2.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+                break;
+            case 2:
+                radioButton3.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+                break;
+            case 3:
+                radioButton4.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+                break;
+        }
+    }
+
+    private void findViewByIds() {
+
+        frameLayoutAnswer = findViewById(R.id.framelayout_answer);
+        buttonSubmitAnswer = findViewById(R.id.btn_edtxanswer_submit);
+        edtxAnswer = findViewById(R.id.edtx_answer_explained);
+
+        mAdView = findViewById(R.id.adView);
+        templateView = findViewById(R.id.nativeTemplateView);
+        buttonShowCorrectAnswer = findViewById(R.id.btn_show_the_correct_answer);
+
+
+        textViewMain = findViewById(R.id.tx_main);
+
+
+        wbv = findViewById(R.id.webv);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        llm = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(llm);
+
+        imageViewQuestion = findViewById(R.id.imgv_q);
+        imageViewAnswer = findViewById(R.id.imgv_a);
+
+
+        floatingActionButtonNext = findViewById(R.id.fab_next);
+        floatingActionButtonPrev = findViewById(R.id.fab_prev);
+
         textViewQuestion = findViewById(R.id.tx_question);
         radioGroupOptions = findViewById(R.id.radio_group_options);
         radioButton1 = findViewById(R.id.radio_btn1);
@@ -505,10 +501,9 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private boolean Validate(int count) {
 
-        if (count != 0)
-            if (count % 5 == 0) {
-                showFSAd();
-            }
+        if (count != 0) if (count % 5 == 0) {
+            showFSAd();
+        }
 
         int radioButtonID = radioGroupOptions.getCheckedRadioButtonId();
         View radioButton = radioGroupOptions.findViewById(radioButtonID);
@@ -542,15 +537,16 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void showFSAd() {
-        if (SplashActivity.prodFlag)
-            if (mInterstitialAd != null) {
-                mInterstitialAd.show(QuestionsActivity.this);
-            }
+        if (SplashActivity.prodFlag) if (mInterstitialAd != null) {
+            mInterstitialAd.show(QuestionsActivity.this);
+        }
     }
 
     private void loadQnAsforExam(int i) {
 
         //    diagrams(subject,year,i);
+
+        makeToast(count + "");
 
         Animation animTimeChange = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
         textViewQuestion.startAnimation(animTimeChange);
@@ -572,38 +568,36 @@ public class QuestionsActivity extends AppCompatActivity {
             imageViewQuestion.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);
             Glide.with(getApplicationContext()).load(listQnAs.get(i).getStringQimg()).listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            makeToast("Poor connectivity!");
-                            return false;
-                        }
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    makeToast("Poor connectivity!");
+                    return false;
+                }
 
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(imageViewQuestion);
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+            }).into(imageViewQuestion);
         } else imageViewQuestion.setVisibility(View.GONE);
 
         if (listQnAs.get(i).getStringAimg().length() > 1) {
             imageViewAnswer.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);
             Glide.with(getApplicationContext()).load(listQnAs.get(i).getStringAimg()).listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    progressBar.setVisibility(View.GONE);
+                    return false;
+                }
 
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(imageViewAnswer);
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+            }).into(imageViewAnswer);
         } else imageViewAnswer.setVisibility(View.GONE);
 
         buttonShowCorrectAnswer.setVisibility(View.INVISIBLE);
@@ -647,16 +641,14 @@ public class QuestionsActivity extends AppCompatActivity {
 
                     }
 
-                    if (ds.child("Dq") != null)
-                        if (ds.child("Dq").getValue() != null) {
-                            if (ds.child("Dq").getValue().toString().length() > 0) {
-                                imgUrlQ = ds.child("Dq").getValue().toString();
-                            }
+                    if (ds.child("Dq") != null) if (ds.child("Dq").getValue() != null) {
+                        if (ds.child("Dq").getValue().toString().length() > 0) {
+                            imgUrlQ = ds.child("Dq").getValue().toString();
                         }
-                    if (ds.child("Da") != null)
-                        if (ds.child("Da").getValue() != null) {
-                            imgUrlA = ds.child("Da").getValue().toString();
-                        }
+                    }
+                    if (ds.child("Da") != null) if (ds.child("Da").getValue() != null) {
+                        imgUrlA = ds.child("Da").getValue().toString();
+                    }
 
                     arrayListOptions.add(opt1);
                     arrayListOptions.add(opt2);
@@ -665,8 +657,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
                     if (imgUrlQ == null) {
-                        if (imgUrlA == null)
-                            qnA = new QnA(strQ, strA, arrayListOptions, "", "");
+                        if (imgUrlA == null) qnA = new QnA(strQ, strA, arrayListOptions, "", "");
                         else qnA = new QnA(strQ, strA, arrayListOptions, "", imgUrlA);
                     } else {
                         if (imgUrlA == null)
@@ -678,6 +669,12 @@ public class QuestionsActivity extends AppCompatActivity {
                         }
                     }
 
+                    if (ds.child("AE") != null)
+                        if (ds.child("AE").getValue() != null) {
+                            strAE = ds.child("AE").getValue().toString();
+                        } else strAE = "Explain Briefly...!";
+
+                    qnA.setStringAnsExplained(strAE);
 
                     listQnAs.add(qnA);
 

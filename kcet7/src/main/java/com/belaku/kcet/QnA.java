@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class QnA {
 
-    String stringQ, stringA, stringQimg, stringAimg;
+    String stringQ, stringA, stringQimg, stringAimg, stringAnsExplained;
     ArrayList<String> arrayListOptions = new ArrayList<>();
 
     public QnA(String stringQ, String stringA, ArrayList<String> arrayListOptions, String stringQimg, String stringAimg) {
@@ -13,6 +13,14 @@ public class QnA {
         this.arrayListOptions = arrayListOptions;
         this.stringQimg = stringQimg;
         this.stringAimg = stringAimg;
+    }
+
+    public String getStringAnsExplained() {
+        return stringAnsExplained;
+    }
+
+    public void setStringAnsExplained(String stringAnsExplained) {
+        this.stringAnsExplained = stringAnsExplained;
     }
 
     public String getStringQimg() {

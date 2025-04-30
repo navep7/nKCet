@@ -77,8 +77,35 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
         app:srcCompat="@drawable/cet_icon" />
+
+    <TextView
+        android:id="@+id/tx_uname"
+        android:layout_above="@+id/fab"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_logout"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/fab"
+        android:layout_above="@+id/tx_uname"
+        app:srcCompat="@drawable/cet_icon" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_contactus"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/fab"
+        android:layout_above="@+id/tx_uname"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
 
 
 </RelativeLayout>
