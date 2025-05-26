@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.belaku.kcet'
+    namespace 'com.parvatha.kcet'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.belaku.kcet"
+        applicationId "com.parvatha.kcet"
         minSdk 24
         targetSdk 34
         versionCode 1
